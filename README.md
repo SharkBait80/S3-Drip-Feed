@@ -10,7 +10,7 @@ To proxy Amazon S3 buckets so that the response can be chunked; this is useful f
 
 - [.NET Core 3.1](https://dotnet.microsoft.com/download/dotnet-core)
 
-- An IDE - VS Code will do fine
+- An IDE - [VS Code](https://code.visualstudio.com/) will do fine
 
 That's pretty much it.
 
@@ -21,9 +21,13 @@ That's pretty much it.
 - Create a .env file to pass environment variables to the Docker container.
 
 AWS_ACCESS_KEY_ID=XYZ
+
 AWS_SECRET_ACCESS_KEY=XYZ
+
 AWS_REGION=XYZ
+
 AWS_DEFAULT_REGION=XYZ
+
 S3_BUCKET=XYZ
 
 - The S3 bucket that you want to proxy should be defined in S3_BUCKET.
