@@ -42,6 +42,8 @@ S3_BUCKET=XYZ
 
 - Create a task definition pointing to your ECR repository
 
+- Set the following environment variables in the task definition: AWS_REGION, AWS_DEFAULT_REGION, S3_BUCKET. AWS credentials are taken from the IAM role configured under task role.
+
 - A comprehensive set of instructions is available [here](https://github.com/aws-samples/amazon-ecs-fargate-aspnetcore)
 
 - **Make sure that the IAM role that you are running the task with has at least read permissions on the S3 bucket you specified.**
