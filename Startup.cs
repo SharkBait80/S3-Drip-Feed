@@ -36,7 +36,7 @@ namespace s3proxy.net
                 app.UseDeveloperExceptionPage();
             }
 
-          //  app.UseHttpsRedirection();
+          // app.UseHttpsRedirection();
 
             app.UseRouting();
 

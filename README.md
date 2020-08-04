@@ -34,6 +34,8 @@ S3_BUCKET=XYZ
 
 - run.sh builds the Docker image and runs it. You might need to chmod +x it.
 
+- To run this on TLS, you will need to use the self-signed (or trusted) certificate.
+
 ### To run this on AWS using Fargate
 
 - Create your Fargate cluster
