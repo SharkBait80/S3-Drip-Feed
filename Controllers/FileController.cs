@@ -17,10 +17,26 @@ namespace s3proxy.net.Controllers
     {
         private readonly ILogger<FileController> _logger;
 
-       
-        const int BufferSize = 1024 * 5; 
+        int? _BufferSize = null;
+        int BufferSize
+        {
+            get {
+                if (_BufferSize != null)
+                    return _BufferSize.Value;
 
-        
+                if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("CHUNK_SIZE")))
+                {
+                    int parsedSize = 0;
+                    if (int.TryParse(Environment.GetEnvironmentVariable("CHUNK_SIZE"), out parsedSize))
+                        _BufferSize = parsedSize;
+                }
+
+                if (_BufferSize == null)
+                    _BufferSize = 1024 * 4; // 4KB default
+
+                return _BufferSize.Value;
+            }
+        }
 
         public FileController(ILogger<FileController> logger)
         {
@@ -29,7 +45,7 @@ namespace s3proxy.net.Controllers
         }
 
         [HttpGet("{Key}")]
-        public async Task<IActionResult> GetFile(string Key)
+        public async Task GetFile(string Key)
         {
             if (string.IsNullOrEmpty(Key))
                 throw new Exception("No key defined.");
@@ -45,7 +61,7 @@ namespace s3proxy.net.Controllers
             if (Key.Contains("/"))
                 fileName = Key.Substring(Key.LastIndexOf("/")+1);
 
-            var url = $"https://{bucketName}.s3.amazonaws.com/{Key}{HttpUtility.UrlDecode(Request.QueryString.ToString())}";
+            var url = $"https://{bucketName}.s3.amazonaws.com/{Key}{Request.QueryString.ToString()}";
 
             _logger.LogInformation($"Downloading S3 object from {url}");
 
@@ -66,11 +82,16 @@ namespace s3proxy.net.Controllers
 
                     var responseStream = await response.Content.ReadAsStreamAsync();
 
-                    BufferedStream buffered = new BufferedStream(responseStream, BufferSize);
-                            
+                    byte[] buffer = new byte[BufferSize];
 
-                    return File(buffered, contentType);
-                            
+                    int bytesRead;
+
+                    while ((bytesRead=responseStream.Read(buffer,0,buffer.Length))>0)
+                    {
+                        
+                        await Response.Body.WriteAsync(buffer, 0, bytesRead);
+                        await Response.Body.FlushAsync();
+                    }
                         
                     }
                     else
