@@ -24,6 +24,7 @@
       "environmentVariables": {
         "S3_BUCKET": "ml-july2020",
         "CHUNK_SIZE": "8096",
+        "TLS_WAIT_TIME": "1",
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "applicationUrl": "http://localhost:5000;https://localhost:5001"

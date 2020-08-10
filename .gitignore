@@ -5,6 +5,7 @@ project.lock.json
 *.pyc
 *.env
 s3url.py
+*.pfx
 
 # Visual Studio Code
 .vscode
