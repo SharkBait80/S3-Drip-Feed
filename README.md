@@ -26,6 +26,8 @@ That's pretty much it. Since the application does not actually use AWS credentia
 
 - CHUNK_SIZE - the size of TLS frames, in bytes, to send back to the client. This is set to 4KB (4096) by default. Increase or reduce this as required to match the client's hardware specifications.
 
+- TLS_WAIT_TIME - the time to wait between sending of each TLS frame, in milliseconds. By default, the proxy will wait 500ms between each TLS frame to prevent overwhelming downstream clients. This can be adjusted to match the capabilities of the client hardware.
+
 ### To run locally
 
 - Create a .env file to pass environment variables to the Docker container.
