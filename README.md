@@ -47,3 +47,11 @@ That's pretty much it. Since the application does not actually use AWS credentia
 - Set the following environment variables in the task definition: AWS_REGION, AWS_DEFAULT_REGION, S3_BUCKET, CHUNK_SIZE. 
 
 - A comprehensive set of instructions is available [here](https://github.com/aws-samples/amazon-ecs-fargate-aspnetcore)
+
+## Usage
+
+This proxy will use a HTTP request to stream the file from Amazon S3 in sizes that the client can accept. To download a file called "myfile.doc" from an S3 bucket called "mybucket" in the ap-southeast-1 region, use the following URL:
+
+https://ipaddress/file/myfile.doc
+
+where ipaddress is either localhost or the DNS/IP address of the Network Load Balancer. The bucket name and region should be populated in the .env file (if running locally), or specified in the task definition if running on ECS.
