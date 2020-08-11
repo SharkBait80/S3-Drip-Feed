@@ -42,6 +42,6 @@ That's pretty much it. Since the application does not actually use AWS credentia
 
 - Create a task definition pointing to your ECR repository
 
-- Set the following environment variables in the task definition: AWS_REGION, AWS_DEFAULT_REGION, S3_BUCKET. 
+- Set the following environment variables in the task definition: AWS_REGION, AWS_DEFAULT_REGION, S3_BUCKET, CHUNK_SIZE. 
 
 - A comprehensive set of instructions is available [here](https://github.com/aws-samples/amazon-ecs-fargate-aspnetcore)
