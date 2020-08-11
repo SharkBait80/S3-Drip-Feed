@@ -12,23 +12,21 @@ To proxy Amazon S3 buckets so that the response can be chunked; this is useful f
 
 - An IDE - [VS Code](https://code.visualstudio.com/) will do fine
 
-That's pretty much it.
+That's pretty much it. Since the application does not actually use AWS credentials but merely passes through any querystring parameters, this will work with presigned URLs.
 
 ## Configuration
+
+- AWS_REGION - the AWS region that the S3 bucket is in, e.g. ap-southeast-1
+
+- AWS_DEFAULT_REGION - the AWS region that the S3 bucket is in, e.g. ap-southeast-1
+
+- S3_BUCKET - the name of the S3 bucket to proxy
+
+- CHUNK_SIZE - the size of TLS frames, in bytes, to send back to the client. This is set to 4KB (4096) by default. Increase or reduce this as required to match the client's hardware specifications.
 
 ### To run locally
 
 - Create a .env file to pass environment variables to the Docker container.
-
-AWS_ACCESS_KEY_ID=XYZ
-
-AWS_SECRET_ACCESS_KEY=XYZ
-
-AWS_REGION=XYZ
-
-AWS_DEFAULT_REGION=XYZ
-
-S3_BUCKET=XYZ
 
 - The S3 bucket that you want to proxy should be defined in S3_BUCKET.
 
@@ -44,8 +42,6 @@ S3_BUCKET=XYZ
 
 - Create a task definition pointing to your ECR repository
 
-- Set the following environment variables in the task definition: AWS_REGION, AWS_DEFAULT_REGION, S3_BUCKET. AWS credentials are taken from the IAM role configured under task role.
+- Set the following environment variables in the task definition: AWS_REGION, AWS_DEFAULT_REGION, S3_BUCKET. 
 
 - A comprehensive set of instructions is available [here](https://github.com/aws-samples/amazon-ecs-fargate-aspnetcore)
-
-- **Make sure that the IAM role that you are running the task with has at least read permissions on the S3 bucket you specified.**
