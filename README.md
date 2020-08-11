@@ -14,6 +14,8 @@ To proxy Amazon S3 buckets so that the response can be chunked; this is useful f
 
 That's pretty much it. Since the application does not actually use AWS credentials but merely passes through any querystring parameters, this will work with presigned URLs.
 
+![Architecture](architecture.png)
+
 ## Configuration
 
 - AWS_REGION - the AWS region that the S3 bucket is in, e.g. ap-southeast-1
