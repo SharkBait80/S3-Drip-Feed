@@ -2,7 +2,7 @@
 
 ## Objective
 
-To proxy Amazon S3 buckets so that the response can be chunked; this is useful for clients that have low memory/CPU.
+To proxy Amazon S3 buckets so that the response can be chunked; this is useful for clients that have low memory/CPU. This helps to get around S3 not supporting the [RFC6066 TLS extensions, specifically TLS frame length negotiation](https://tools.ietf.org/html/rfc6066#section-4).
 
 ## Pre-Requisites
 
